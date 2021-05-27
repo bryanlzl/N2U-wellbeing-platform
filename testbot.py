@@ -42,7 +42,7 @@ def start(update, context):
     Introduction_Markup = telegram.InlineKeyboardMarkup(Introduction_Keyboard)
     context.bot.send_message(chat_id = update.effective_chat.id, text = 'What would you like to inquire today?', reply_markup = Introduction_Markup)
 
-# Need to make the bloody inline keyboard work la, fuck.
+# TODO: Need to make the inline keyboard work as intended.
     
 from telegram.ext import CommandHandler
 start_handler = CommandHandler('start', start)
