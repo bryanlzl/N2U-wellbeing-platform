@@ -1,3 +1,11 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Mon Jun 14 22:50:31 2021
+
+@author: tuweile
+"""
+
 # -*- coding: utf-8 -*-
 """
 Spyder Editor
@@ -164,8 +172,6 @@ def button(update: Update, _: CallbackContext):
     if query.data == "suggestions":
         SuggestionsHP_Keyboard = [
             [telegram.InlineKeyboardButton("Next Month Item Poll Nominations", callback_data="suggestions_itempoll")],
-            [telegram.InlineKeyboardButton("Poll Feedback on Mysterio Boxes",
-                                           callback_data="suggestions_feedbackpoll")],
             [telegram.InlineKeyboardButton("📞 Resources and Hotlines", callback_data="suggestions_resources")],
             [telegram.InlineKeyboardButton("I have a suggestion! (Contact Admin)", callback_data="suggestions_admin")],
             [telegram.InlineKeyboardButton("⬅️ Back", callback_data="start")]]
@@ -230,37 +236,41 @@ def button(update: Update, _: CallbackContext):
 
 # Lazy to make a proper conversation handler, because it seems consecutive and does not allow for going back to previous conversations. Command handlers are easier.
 def command_faq(update: Update, _: CallbackContext):
-    query = update.callback_query
-    faq_received = False
+    user = update.message.from_user
+        
+    # This message is only if nothing has been inputted inside the command.
+    if update.message.text == "/faq":
+        update.message.reply_text("Please enter your FAQ question down below, and we will get back to you at the best possible arrangement and time through Telegram!\n\nThe correct format is: /faq <message>")
+        
+    elif update.message.from_user.is_bot == True:
+        update.message.reply_text("Hello bot! Unfortunately to prevent spam, all automated bot messages will not be processed accordingly. Please use a non-bot account to proceed with this.")
+        
+    else:
+        update.message.reply_text("✅ <b>Your inquiry has been received.</b> ✅\n\nThank you for your inquiry! We will be messaging you back on Telegram shortly to address your question. You will now be re-directed to the starting page.", parse_mode = telegram.ParseMode.HTML)
+        time.sleep(1)
+        _.bot.sendSticker(chat_id = user.id, sticker = "CAACAgIAAxkBAAECbQVgxmOXGKQiXaJuivCoKJEOBi3q0AAC_gADVp29CtoEYTAu-df_HwQ")
+        message = update.message.text.partition("/faq ")[2]
+        _.bot.send_message(chat_id = -1001389088902, text = "✋ <b>FAQ Inquiry Received!</b> ✋\n\nName: " + str(user.first_name) + " " + str(user.last_name) + "\n\nUsername: @" + str(user.username) + "\n\nMessage: " + str(message) + "\n\n<i>This user requires assistance. Please reply back to this user immediately to resolve the problem.</i>", parse_mode = telegram.ParseMode.HTML)
+        time.sleep(3)
+        return start(update, _)
 
-    while (faq_received == False):
-
-        # This message is only if nothing has been inputted inside the command.
-        if update.message.text == "/faq":
-            update.message.reply_text(
-                "Please enter your FAQ question down below, and we will get back to you at the best possible arrangement and time through Telegram!\n\nThe correct format is: /faq <message>")
-            break
-
-        elif update.message.from_user.is_bot == True:
-            update.message.reply_text(
-                "Hello bot! Unfortunately to prevent spam, all automated bot messages will not be processed accordingly. Please use a non-bot account to proceed with this.")
-            break
-
-        else:
-            update.message.reply_text(
-                "✅ <b>Your inquiry has been received.</b> ✅\n\nThank you for your inquiry! We will be messaging you back on Telegram shortly to address your question. You will now be re-directed to the starting page.",
-                parse_mode=telegram.ParseMode.HTML)
-            message = update.message.text.partition("/faq ")[2]
-            user = update.message.from_user
-            _.bot.send_message(chat_id=-1001389088902,
-                               text="✋ <b>FAQ Inquiry Received!</b> ✋\n\nName: " + str(user.first_name) + " " + str(
-                                   user.last_name) + "\n\nUsername: @" + str(user.username) + "\n\nMessage: " + str(
-                                   message) + "\n\n<i>This user requires assistance. Please reply back to this user immediately to resolve the problem.</i>",
-                               parse_mode=telegram.ParseMode.HTML)
-            time.sleep(3)
-            faq_received = True
-            return start(update, _)
-            break
+def command_feedback(update: Update, _: CallbackContext):
+    user = update.message.from_user
+    
+    if update.message.text == "/feedback":
+        update.message.reply_text("Please enter your feedback down below, and we will get back to you at the best possible arrangement and time through Telegram!\n\nThe correct format is: /feedback <message>")
+    
+    elif update.message.from_user.is_bot == True:
+        update.message.reply_text("Hello bot! Unfortunately to prevent spam, all automated bot messages will not be processed accordingly. Please use a non-bot account to proceed with this.")
+        
+    else:
+        update.message.reply_text("✅ <b>Your inquiry has been received.</b> ✅\n\nThank you for your inquiry! We will be messaging you back on Telegram shortly to address your question. You will now be re-directed to the starting page.", parse_mode = telegram.ParseMode.HTML)
+        time.sleep(1)
+        _.bot.sendSticker(chat_id = user.id, sticker = "CAACAgIAAxkBAAECbaRgx2csR9SjmsXnCqAIQkXBAAFmLFkAAkgCAAJWnb0KHPVy-NwpFNAfBA")
+        message = update.message.text.partition("/feedback ")[2]
+        _.bot.send_message(chat_id = -1001268756108, text = "💬 <b>Feedback Inquiry Received!</b> 💬\n\nName: " + str(user.first_name) + " " + str(user.last_name) + "\n\nUsername: @" + str(user.username) + "\n\nMessage: " + str(message) + "\n\n<i>This user has submitted feedback. Do review the feedback, discuss with fellow administrators and reply back to the user where necessary for clarification.</i>", parse_mode = telegram.ParseMode.HTML)
+        time.sleep(3)
+        return start(update, _)
 
 
 def command_TelegramboxA(update: Update, _: CallbackContext):
