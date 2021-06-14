@@ -15,7 +15,6 @@ This is a temporary script file.
 import telegram
 import logging
 import time
-import asyncio
 
 from telegram import ReplyKeyboardMarkup, ReplyKeyboardRemove, Update, ShippingOption, LabeledPrice
 from telegram.ext import (
@@ -80,8 +79,7 @@ def adminbutton(update: Update, _: CallbackContext):
         admin_Keyboard = [
             [telegram.InlineKeyboardButton("New poll", callback_data='poll')]]
         admin_Markup = telegram.InlineKeyboardMarkup(admin_Keyboard)
-        query.edit_message_text(text=f'Admin Panel', reply_markup=admin_Markup)
-
+        adminquery.edit_message_text(text=f'Admin Panel', reply_markup = admin_Markup)
 
 def admin(update: Update, _: CallbackContext):
     admin_list = [195612849, 214053283, 270308503, 125308490, 193865641]
@@ -89,7 +87,7 @@ def admin(update: Update, _: CallbackContext):
     user = update.message.from_user
     if user.id in admin_list:
         admin_Keyboard = [
-            [telegram.InlineKeyboardButton("Create Feedback Form", callback_data = 'feedback')]]
+            [telegram.InlineKeyboardButton("Create New Item Nomination Poll", callback_data = 'feedback')]]
         admin_Markup = telegram.InlineKeyboardMarkup(admin_Keyboard)
         update.message.reply_text(text=f'Admin Panel', reply_markup=admin_Markup)
     else:
@@ -99,7 +97,7 @@ def admin(update: Update, _: CallbackContext):
 
 def button(update: Update, _: CallbackContext):
     query = update.callback_query
-    query.answer()
+    query.answer()  
 
     # Try to make this algorithm nicer, since it is full of ifs and uses too much computational power. Chemistry student struggling here bro (and not specialized in this)
     if query.data == "start":
@@ -118,6 +116,12 @@ def button(update: Update, _: CallbackContext):
         query.edit_message_text(
             text=f"❓<b> What is NTU Mysterio Box </b>❓\n\nThe NTU Mysterio Box is a well-being and mental wellness check that goes beyond online applications to give you a motivational box – a physical manifestation in which you will surely find it useful in overcoming inconveniences while having it tailored and personalized to your own specific needs over time! Because here in NTU, every mental issue is unique, and we want to understand and help you to cope with life's mechanisms.\n\nDesigned by NTU students from various disciplines, we brought our different expertises into tackling this matter and hope that the NTU Mysterio Box will help to enhance the well-being and mindset of NTU students, all while ensuring that NTU remains a vibrant and conducive environment to work in.",
             reply_markup=Return_Markup, parse_mode=telegram.ParseMode.HTML)
+    elif query.data == "status":
+        Return_Keyboard = [[telegram.InlineKeyboardButton("⬅️ Back", callback_data="start")]]
+        Return_Markup = telegram.InlineKeyboardMarkup(Return_Keyboard)
+        query.edit_message_text(
+            text =f"We would love to show it to you but our developers are overworked and lacking of coffee! This feature will be implemented again soon!",
+            reply_markup=Return_Markup)
     elif query.data == "faq":
         FAQ_Keyboard = [[telegram.InlineKeyboardButton("Price of the Mysterio Box", callback_data="faq1")],
                         [telegram.InlineKeyboardButton("What to expect from the Mysterio Box?", callback_data="faq2")],
@@ -149,6 +153,12 @@ def button(update: Update, _: CallbackContext):
         query.edit_message_text(
             text=f"Fantastic choice. What boxes would you be interested in getting for this month, or do you need more info?",
             reply_markup=OrderP2G_Markup)
+    elif query.data == "order_personalized":
+        Return_Keyboard = [[telegram.InlineKeyboardButton("⬅️ Back", callback_data="start")]]
+        Return_Markup = telegram.InlineKeyboardMarkup(Return_Keyboard)
+        query.edit_message_text(
+            text =f"We would love to show it to you but our developers are overworked and lacking of coffee! This feature will be implemented again soon!",
+            reply_markup=Return_Markup)
     elif query.data == "order_generic_A":
         OrderP3_Keyboard = [[telegram.InlineKeyboardButton("⬅️ Back", callback_data="order_generic")]]
         OrderP3_Markup = telegram.InlineKeyboardMarkup(OrderP3_Keyboard)
@@ -162,11 +172,11 @@ def button(update: Update, _: CallbackContext):
         query.edit_message_text(
             text=f"Awesome! To confirm, please click or use the command /boxB to begin your transaction!",
             reply_markup=OrderP3_Markup)
-    elif query.data == "order_generic_query":
+    elif query.data == "order_generic_query": # To update and provide admin CP support
         OrderP3_Keyboard = [[telegram.InlineKeyboardButton("⬅️ Back", callback_data="order_generic")]]
         OrderP3_Markup = telegram.InlineKeyboardMarkup(OrderP3_Keyboard)
         query.edit_message_text(
-            text=f"For this month's boxes, this is what you can expect to receive:\n\n<b>Box A :</b> Placeholder\n\n<b>Box B: </b> Placeholder",
+            text=f"For this month's boxes, this is what you can expect to receive:\n\n<b>Box A :</b> 3x Motivational Stickers, Deck of Activity Cards, 1x USB Cable Reel, 1x Headphone Stand, 1x Facial Mask Clip\n\n<b>Box B: </b> 3x Motivational Stickers, Deck of Activity Cards, 1x Thumbdrive Stand, 1x USB Cable Reel, 1x Food Snack",
             reply_markup=OrderP3_Markup, parse_mode=telegram.ParseMode.HTML)
 
     if query.data == "suggestions":
@@ -179,7 +189,12 @@ def button(update: Update, _: CallbackContext):
         query.edit_message_text(
             text=f"Nice, we always appreciate your suggestions and your feedback! What would you like to discuss about?",
             reply_markup=SuggestionsHP_Markup)
-    # Item Poll and Feedback Poll
+    elif query.data == "suggestions_itempoll":
+        SuggestionsHPR_Keyboard = [[telegram.InlineKeyboardButton("⬅️ Back", callback_data="suggestions")]]
+        SuggestionsHPR_Markup = telegram.InlineKeyboardMarkup(SuggestionsHPR_Keyboard)
+        query.edit_message_text(
+            text = f"We would love your recommendations for the next month Mysterio Box!\n\nDo head down over to @n2uitive announcement channel to cast your recommendations and see what others think too!",
+            reply_markup = SuggestionsHPR_Markup)
     elif query.data == "suggestions_resources":
         SuggestionsHPR_Keyboard = [[telegram.InlineKeyboardButton("⬅️ Back", callback_data="suggestions")]]
         SuggestionsHPR_Markup = telegram.InlineKeyboardMarkup(SuggestionsHPR_Keyboard)
@@ -534,6 +549,7 @@ def main() -> None:
     NTU_MB_Bot_Dispatcher = NTU_MB_Bot_Updater.dispatcher
     NTU_MB_Bot_Dispatcher.add_handler(CommandHandler('start', start))
     NTU_MB_Bot_Dispatcher.add_handler(CommandHandler('faq', command_faq))
+    NTU_MB_Bot_Dispatcher.add_handler(CommandHandler('feedback', command_feedback))
     # NTU_MB_Bot_Dispatcher.add_handler(cancel_handler)
     # echo_handler = MessageHandler(Filters.text & (~Filters.command), echo)
     # NTU_MB_Bot_Dispatcher.add_handler(echo_handler)
