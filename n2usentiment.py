@@ -24,6 +24,6 @@ def sentimentanalysis(text):
             keyword = keyword.replace(",", "")
             keyword = keyword.replace("'", "")
             word, emotion = keyword.split(":")
-            if word in clean_words:
+            if word in cleaned_list:
                 emotion_list.append(emotion)
-    return [SentimentIntensityAnalyzer().polarity_scores(text), Counter(emotions)]
+    return [SentimentIntensityAnalyzer().polarity_scores(text), Counter(emotion_list)]
