@@ -552,6 +552,7 @@
  'sotong': 'confused',
  'smlj': 'angry',
  'shiok': 'happy',
+ 'toh': 'burdened',
  'wayang': 'upset',
  'xiasuay': 'embarrased',
  'suay': 'upset',
