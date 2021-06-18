@@ -10,7 +10,7 @@ TO DO LIST:
 * Once all of this is done right, we move on to the more difficult machine-learning parts.
 
 DIFFICULT:
-* Need to figure out machine learning (kNN, linear regression, yada yada) in the sense that using the "How are you feeling" function, we can pick up certain tones and provide recommendations to the end-user.
+* ~Need to figure out machine learning (kNN, linear regression, yada yada) in the sense that using the "How are you feeling" function, we can pick up certain tones and provide recommendations to the end-user.~
 * We also need to provide recommendations to the order-list such that over time, the bot understands and can interpret how the end-user is feeling through phrases, sentences and words so that key recommendations can be provided. It is important to note that the same item should not be given twice, and that the item should be pre-approved by the end-user (unless it is a mystery).
 * Figure out simply the long-term objectives of this bot basically, and how are we going to integrate this bot into bigger things or sponsorships.
 
