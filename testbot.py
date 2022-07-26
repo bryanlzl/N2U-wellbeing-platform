@@ -31,7 +31,7 @@ from telegram.ext import (
 
 # Security clearance and login information for bot
 
-NTU_MB_Bot = telegram.Bot(token="1893158739:AAETldsJjkeMaQOVm6h_OTqB283Ubdq8Uy8")
+NTU_MB_Bot = telegram.Bot(token="<TOKEN REVOKED>")
 logger = logging.getLogger(__name__)
 DELIVERY, LOCATION, SUBSCRIPTION, CONFIRMATION, SAVEINFO, CLOSED = range(6)
 
