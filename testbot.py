@@ -294,7 +294,7 @@ def command_TelegramboxA(update: Update, _: CallbackContext):
     SwiftBoxA = LabeledPrice("NTU Mysterio Box A", 600)
     _.bot.sendInvoice(chat_id=user.id, title="NTU Mysterio Box A",
                       description="A motivational box for students (Placeholder)", payload="swiftboxA",
-                      provider_token="284685063:TEST:YWI4MTZhMmY3ZjYz", currency="SGD", prices=[SwiftBoxA],
+                      provider_token="<TOKEN REVOKED>", currency="SGD", prices=[SwiftBoxA],
                       max_tip_amount=500, suggested_tip_amounts=[50, 100, 200, 500],
                       photo_url="https://i3.cpcache.com/product/1813695916/powerful_inspirational_quote_keepsake_box.jpg?side=Front&color=Mahogany&height=630&width=630&qv=90",
                       photo_size=200, photo_width=200, photo_height=200, need_name=True, need_phone_number=True,
@@ -308,7 +308,7 @@ def command_TelegramboxB(update: Update, _: CallbackContext):
     SwiftBoxA = LabeledPrice("NTU Mysterio Box B", 600)
     _.bot.sendInvoice(chat_id=user.id, title="NTU Mysterio Box B",
                       description="A motivational box for students (Placeholder)", payload="swiftboxB",
-                      provider_token="284685063:TEST:YWI4MTZhMmY3ZjYz", currency="SGD", prices=[SwiftBoxA],
+                      provider_token="<TOKEN REVOKED>", currency="SGD", prices=[SwiftBoxA],
                       max_tip_amount=500, suggested_tip_amounts=[50, 100, 200, 500],
                       photo_url="https://i3.cpcache.com/product/1813695916/powerful_inspirational_quote_keepsake_box.jpg?side=Front&color=Mahogany&height=630&width=630&qv=90",
                       photo_size=200, photo_width=200, photo_height=200, need_name=True, need_phone_number=True,
@@ -543,7 +543,7 @@ def main() -> None:
     #     allow_reentry = True,
     # )
 
-    NTU_MB_Bot_Updater = Updater(token="1893158739:AAETldsJjkeMaQOVm6h_OTqB283Ubdq8Uy8", use_context=True)
+    NTU_MB_Bot_Updater = Updater(token="<TOKEN REVOKED>", use_context=True)
     # start_handler = CommandHandler('start', start)
     # cancel_handler = CommandHandler('cancel', cancel)
     NTU_MB_Bot_Dispatcher = NTU_MB_Bot_Updater.dispatcher
