@@ -1,4 +1,5 @@
 # ntumysterybox
+<img src="./resources/N2U_logo.jpg" alt="Logo">
 **NTU Mystery Box Telegram Bot**
 
 UPDATE: We got operational funding from NTU!
